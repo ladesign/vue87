@@ -10,9 +10,9 @@
 
 ## 用(傳統方式)命令列把修改過後的程式碼上傳到服務端代管(例如github)的步驟：
 
-步驟 1. git add .
-步驟 2. git commit -m "提交資訊"
-步驟 3. git push
+1. git add .
+2. git commit -m "提交資訊"
+3. git push
 
 ## 製作首頁App元件
 1. 完成 Header 區域，使用的是 Mint-UI 中的Header元件
