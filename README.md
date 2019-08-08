@@ -9,6 +9,7 @@
 ## [主流開源協議之間有何異同？](https://www.zhihu.com/question/19568896)
 
 ## 用(傳統方式)命令列把修改過後的程式碼上傳到服務端代管(例如github)的步驟：
+
 步驟 1. git add .
 步驟 2. git commit -m "提交資訊"
 步驟 3. git push
