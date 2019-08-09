@@ -18,8 +18,8 @@
 1. 完成 Header 區域，使用的是 Mint-UI 中的Header元件
 2. 製作底部的 Tabbar 區域，使用的是 MUI 的 Tabbar.html
  + 在製作 購物車 小圖示的時候，操作會相對多一些：
- + 先把 擴充套件圖示的 css 樣式，拷貝到 專案中
- + 拷貝 擴充套件字型庫 ttf 檔案，到專案中
+ + 先把 mui 擴充圖示的 css 樣式，拷貝到專案中
+ + 拷貝 mui 擴充圖示字型庫 ttf 檔案，拷貝到專案中
  + 為 購物車 小圖示 ，新增 如下樣式 `mui-icon mui-icon-extra mui-icon-extra-cart`
 3. 要在 中間區域放置一個 router-view 來展示路由匹配到的元件
 

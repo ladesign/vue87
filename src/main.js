@@ -1,21 +1,48 @@
 // 入口文件
-// console.log('OK')
-
+// console.log('入口文件OK')
 import Vue from 'vue'
 
-// 匯入 MUI 的樣式
-import './lib/mui/css/mui.min.css'
+// 1.1 匯入路由的包
+import VueRouter from 'vue-router'
+// 1.2 安裝路由
+Vue.use(VueRouter)
 
-// 按需匯入 Mint-UI 中的元件   
-import {
-  Header
-} from 'mint-ui'
+// 2.1 匯入 vue-resource
+import VueResource from 'vue-resource'
+// 2.2 安裝 vue-resource
+Vue.use(VueResource)
+
+// 匯入 MUI 的樣式，包含預設圖標樣式
+import './lib/mui/css/mui.min.css'
+// 匯入 MUI 的擴充圖標樣式檔
+import './lib/mui/css/icons-extra.css'
+
+// 按需匯入 Mint-UI 中的元件：
+// 頂部固定導航欄
+import {Header} from 'mint-ui'
 Vue.component(Header.name, Header)
+// 首頁廣告輪播   
+import {Swipe, SwipeItem} from 'mint-ui'
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
 
 // 匯入 App 根元件
 import app from './App.vue'
 
+// // 2.3 全域性設定API請求的根路徑
+// Vue.http.options.root = 'http://www.liulongbin.top:3005';
+// // 2.4 全域性設定 post 時候表單數據格式組織形式  application/x-www-form-urlencoded，
+// //     手動發起的 Post 請求，預設沒有表單格式，有的伺服器處理不了，
+// //     所以通過 post 方法的第三個參數， { emulateJSON: true } 設定 提交的內容型別 為 普通表單數據格式。
+// Vue.http.options.emulateJSON = true;
+
+
+
+// 1.3 匯入自己的 router.js 路由模組
+import router from './router.js'
+
 var vm = new Vue({
   el: '#app',
-  render: c => c(app)
+  render: c => c(app),
+  router // 1.4 掛載路由對像到 VM 實例上
 })

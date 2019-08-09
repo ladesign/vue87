@@ -10,58 +10,57 @@
       </span>
     </mt-header>-->
 
-    <!-- 中間的 路由 router-view 區域 -->
-    <!-- <transition>
+    <!-- 中間的 路由切換時的渲染區域 router-view  -->
+    <transition>
 			<router-view></router-view>
-    </transition>-->
+    </transition>
 
     <!-- 底部 Tabbar 區域 
     引用 MUI框架\tabbar(選項卡)\底部選項卡-div模式
     -->
     <!-- 一般html方式 -->
-    <nav class="mui-bar mui-bar-tab">
+    <!-- <nav class="mui-bar mui-bar-tab">
       <a class="mui-tab-item mui-active" href="#home">
         <span class="mui-icon mui-icon-home"></span>
         <span class="mui-tab-label">首頁</span>
       </a>
       <a class="mui-tab-item" href="#member">
-        <span class="mui-icon mui-icon-email">
-          <span class="mui-badge">9</span>
+        <span class="mui-icon mui-icon-contact">
         </span>
         <span class="mui-tab-label">會員</span>
       </a>
       <a class="mui-tab-item" href="#shopcar">
-        <span class="mui-icon mui-icon-contact"></span>
+        <span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge">0</span></span>
         <span class="mui-tab-label">購物車</span>
       </a>
       <a class="mui-tab-item" href="#search">
-        <span class="mui-icon mui-icon-gear"></span>
+        <span class="mui-icon mui-icon-search"></span>
         <span class="mui-tab-label">搜索</span>
       </a>
-    </nav>
-    <!-- 改成vur路由方式 -->
-    <!-- <nav class="mui-bar mui-bar-tab">
-			<router-link class="mui-tab-item-llb" to="/home">
+    </nav> -->
+    <!-- 改成vur-router路由方式 -->
+    <nav class="mui-bar mui-bar-tab">
+			<router-link class="mui-tab-item" to="/home">
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首頁</span>
 			</router-link>
-			<router-link class="mui-tab-item-llb" to="/member">
+			<router-link class="mui-tab-item" to="/member">
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">會員</span>
 			</router-link>
-			<router-link class="mui-tab-item-llb" to="/shopcar">
+			<router-link class="mui-tab-item" to="/shopcar">
 				<span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-					<span class="mui-badge" id="badge">{{ $store.getters.getAllCount }}</span>
+					<span class="mui-badge" id="badge">0</span>
 				</span>
 				<span class="mui-tab-label">購物車</span>
 			</router-link>
-			<router-link class="mui-tab-item-llb" to="/search">
+			<router-link class="mui-tab-item" to="/search">
 				<span class="mui-icon mui-icon-search"></span>
 				<span class="mui-tab-label">搜索</span>
 			</router-link>
-    </nav>-->
+    </nav>
 
-    <h1>這是 APP 根元件</h1>
+    <!-- <h1>這是 APP 根元件</h1> -->
   </div>
 </template>
 
@@ -71,11 +70,29 @@
 
 
 <style lang="scss" scoped>
+// 空出頂部 Header、 底部 Tabbar 區域
 .app-container {
   padding-top: 40px;
   padding-bottom: 50px;
-  overflow-x: hidden;
+  overflow-x: hidden; // 加上transition後，元件切換時Header不要跟著滑動
 }
+
+// 路由切換時過場動畫
+.v-enter {
+  opacity: 0;
+  transform: translateX(100%); // 由右側進入
+}
+.v-leave-to {
+  opacity: 0;
+  transform: translateX(-100%); // 往左側消失
+  position: absolute;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.5s ease;
+}
+
+
 </style>
 
 
