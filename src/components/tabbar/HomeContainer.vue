@@ -11,7 +11,7 @@
       <mt-swipe-item>2</mt-swipe-item>
       <mt-swipe-item>3</mt-swipe-item>
     </mt-swipe> -->
-    <!-- 套用真實數據 -->
+    <!-- Swipe標籤套用真實數據 -->
     <mt-swipe :auto="4000">
       <!-- 在元件中，使用v-for循環的話，一定要使用 key -->
       <!-- 將來，誰使用此 輪播圖元件，誰為我們傳遞 lunbotuList -->
@@ -27,35 +27,68 @@
 
 
     <!-- 
-      九宮格 ，使用MUI的"9宮格默認樣式"：mui-master\examples\hello-mui\examples\grid-default.html
+      九宮格 ，使用MUI的"9宮格默認樣式"：mui-master\examples\hello-mui\examples\grid-default.html      
     -->
-    <!-- 直接由範例複製，測試九宮格是否成功 -->
-    <ul class="mui-table-view mui-grid-view mui-grid-9">
+    <!-- 直接由範例複製，把原來的mui圖標改成圖片，測試九宮格是否成功 -->
+    <!-- <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-          <!-- <span class="mui-icon mui-icon-home"></span> -->
           <img src="../../images/menu1.png" alt="">
           <div class="mui-media-body">新聞資訊</div></a></li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-          <!-- <span class="mui-icon mui-icon-email"></span> -->
           <img src="../../images/menu2.png" alt="">
           <div class="mui-media-body">圖片分享</div></a></li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-          <!-- <span class="mui-icon mui-icon-chatbubble"></span> -->
           <img src="../../images/menu3.png" alt="">
           <div class="mui-media-body">商品購買</div></a></li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-          <!-- <span class="mui-icon mui-icon-location"></span> -->
           <img src="../../images/menu4.png" alt="">
           <div class="mui-media-body">留言反饋</div></a></li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-          <!-- <span class="mui-icon mui-icon-search"></span> -->
           <img src="../../images/menu5.png" alt="">
           <div class="mui-media-body">視訊專區</div></a></li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-          <!-- <span class="mui-icon mui-icon-phone"></span> -->
           <img src="../../images/menu6.png" alt="">
           <div class="mui-media-body">聯繫我們</div></a></li>		            
-    </ul>
+    </ul> -->
+    <!-- 把<a>改成路由 -->
+    <ul class="mui-table-view mui-grid-view mui-grid-9">
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <router-link to="/home/newslist">
+          <img src="../../images/menu1.png" alt="">
+          <div class="mui-media-body">新聞資訊</div>
+        </router-link>
+      </li>
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <router-link to="/home/photolist">
+          <img src="../../images/menu2.png" alt="">
+          <div class="mui-media-body">圖片分享</div>
+        </router-link>
+      </li>
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <router-link to="/home/goodslist">
+          <img src="../../images/menu3.png" alt="">
+          <div class="mui-media-body">商品購買</div>
+        </router-link>
+      </li>
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <a href="#">
+          <img src="../../images/menu4.png" alt="">
+          <div class="mui-media-body">留言反饋</div>
+        </a>
+      </li>
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <a href="#">
+              <img src="../../images/menu5.png" alt="">
+              <div class="mui-media-body">視訊專區</div>
+        </a>
+      </li>
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <a href="#">
+          <img src="../../images/menu6.png" alt="">
+          <div class="mui-media-body">聯繫我們</div>
+        </a>
+      </li>
+    </ul> 
 
 
 
