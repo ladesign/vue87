@@ -40,7 +40,7 @@
           <div class="mui-media-body">
             <h1>{{ item.title }}</h1>
             <p class='mui-ellipsis'>
-              <span>發表時間：{{ item.add_time | dateFormat }}</span>
+              <span>發表時間：{{ item.add_time | dateFormat }}</span> <!--這邊將使用全域過濾器，過濾器寫在main.js中-->
               <span>點選：{{item.click}}次</span>
             </p>
           </div>
@@ -66,8 +66,8 @@ export default {
     getNewsList() {
       console.log('獲取新聞列表');
       // 獲取新聞列表
-      this.$http.get("http://www.liulongbin.top:3005/api/getnewslist").then(result => { // 完整API路徑
-      // this.$http.get("api/getnewslist").then(result => {  // 入口文件有vue-resource的全域性設定時
+      // this.$http.get("http://www.liulongbin.top:3005/api/getnewslist").then(result => { // 完整API路徑
+      this.$http.get("api/getnewslist").then(result => {  // 入口文件有vue-resource的全域性設定時
         if (result.body.status === 0) {
           // 如果沒有失敗，應該把數據儲存到 data 上
           this.newslist = result.body.message;

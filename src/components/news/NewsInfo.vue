@@ -7,12 +7,10 @@
       <span>發表時間：{{ newsinfo.add_time | dateFormat }}</span>
       <span>點選：{{ newsinfo.click }}次</span>
     </p>
-
     <hr>
-
     <!-- 內容區域 -->
     <div class="content" v-html="newsinfo.content"></div>
-
+    
     <!-- 評論子元件區域 -->
     <comment-box :id="this.id"></comment-box>
   </div>
@@ -30,12 +28,14 @@ export default {
     };
   },
   created() {
+    console.log(this.$route)
     this.getNewsInfo();
   },
   methods: {
     getNewsInfo() {
       // 獲取新聞詳情
-      this.$http.get("api/getnew/" + this.id).then(result => {
+      // this.$http.get("http://www.liulongbin.top:3005/api/getnew/" + this.id).then(result => { // 完整API路徑
+      this.$http.get("api/getnew/" + this.id).then(result => {  // 入口文件有vue-resource的全域性設定時      
         if (result.body.status === 0) {
           this.newsinfo = result.body.message[0];
         } else {
@@ -51,6 +51,7 @@ export default {
 };
 </script>
 
+<!-- <style lang="scss" scoped>  用scoped時，img {width"100%;}無效-->
 <style lang="scss">
 .newsinfo-container {
   padding: 0 4px;
@@ -68,7 +69,7 @@ export default {
   }
   .content {
     img {
-      width: 100%;
+      width: 100%; 
     }
   }
 }
