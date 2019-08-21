@@ -10,8 +10,9 @@
 
     <!-- 縮圖區域 -->
     <div class="thumbs">
-      <!-- 注意：這裡使用的 vue-preview 元件是版本 1.1.3,
-           之前上課錄屏時候, 所使用的 1.0.5 版本的 vue-preview 存在 Bug -->
+      <!-- 使用 vue-preview模組：一個Vue整合PhotoSwipe圖片預覽外掛(https://github.com/LS1231/vue-preview)
+        注意：這裡使用的 vue-preview 元件是版本 1.1.3,
+           day9-10視頻內所講的是 1.0.5 版本的，存在 Bug -->
       <vue-preview :slides="list"></vue-preview>
     </div>
 
@@ -19,7 +20,7 @@
     <div class="content" v-html="photoinfo.content"></div>
 
     <!-- 放置一個現成的 評論子元件 -->
-    <cmt-box :id="id"></cmt-box>
+    <cmt-box :id="this.id"></cmt-box>
   </div>
 </template>
 
@@ -58,7 +59,7 @@ export default {
             item.h = 600
             item.msrc = item.src
           })
-          // 把完整的數據儲存到 list 中
+          // 把循環過的完整的數據儲存到 list 中
           this.list = result.body.message
           console.log(this.list)
         }
@@ -67,9 +68,9 @@ export default {
   },
   components: {
     // 註冊 評論子元件
-    'cmt-box': comment
+    "cmt-box": comment
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

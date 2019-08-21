@@ -1,6 +1,9 @@
 <template>
   <div class="goods-list">
-    
+
+    <!-- 在網頁中，有兩種跳轉方式： -->
+
+    <!-- 方式1： 使用 a 標籤 的形式叫做 標籤跳轉，這邊是路由渲染的a標籤  -->    
     <!-- <router-link class="goods-item" v-for="item in goodslist" :key="item.id" :to="'/home/goodsinfo/' + item.id" tag="div">
       <img :src="item.img_url" alt="">
       <h1 class="title">{{ item.title }}</h1>
@@ -16,8 +19,6 @@
       </div>
     </router-link> -->
 
-    <!-- 在網頁中，有兩種跳轉方式： -->
-    <!-- 方式1： 使用 a 標籤 的形式叫做 標籤跳轉  -->
     <!-- 方式2： 使用 window.location.href 的形式，叫做 程式設計式導航 -->
     <div class="goods-item" v-for="item in goodslist" :key="item.id" @click="goDetail(item.id)">
       <img :src="item.img_url" alt="">

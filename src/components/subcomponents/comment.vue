@@ -43,7 +43,9 @@ export default {
     getComments() {
       // 獲取評論
       // this.$http.get("http://www.liulongbin.top:3005/api/getcomments/" + this.id + "?pageindex=" + this.pageIndex).then(result => { // 完整API路徑
-      this.$http.get("api/getcomments/" + this.id + "?pageindex=" + this.pageIndex).then(result => {  // 入口文件有vue-resource的全域性設定時   
+      // 入口文件有vue-resource的全域性設定時 
+      // this.$http.get("api/getcomments/" + this.$route.params.id + "?pageindex=" + this.pageIndex).then(result => {  // 用 路由對象的params屬性傳遞參數 
+      this.$http.get("api/getcomments/" + this.id + "?pageindex=" + this.pageIndex).then(result => {  // 用props傳遞參數 
           if (result.body.status === 0) {
             // this.comments = result.body.message;
             // 每當獲取新評論數據的時候，不要把老數據清空覆蓋，而是應該以老數據，拼接上新數據
@@ -51,7 +53,7 @@ export default {
           } else {
             Toast("獲取評論失敗！");
           }
-        });
+      });
     },
     getMore() {
       // 載入更多
@@ -64,21 +66,22 @@ export default {
         return Toast("評論內容不能為空！");
       }
 
-      // 發表評論
+      // 發表評論，post請求
       // 參數1： 請求的URL地址
       // 參數2： 提交給伺服器的數據對像 { content: this.msg }
-      // 參數3： 定義提交時候，表單中數據的格式  { emulateJSON:true }
-      this.$http.post("api/postcomment/" + this.$route.params.id, {
-          content: this.msg.trim()
-        })
-        .then(function(result) {
-          if (result.body.status === 0) {
+      // 參數3： 定義提交時候，表單中數據的格式  { emulateJSON:true } ==>已在main.js全域配置
+      // this.$http.post("http://www.liulongbin.top:3005/api/postcomment/" + this.$route.params.id, {content: this.msg.trim()},{ emulateJSON: true }).then(result => { // 完整API路徑
+      // 入口文件有vue-resource的全域性設定時：
+      // this.$http.post("api/postcomment/" + this.$route.params.id, {content: this.msg.trim()},{ emulateJSON: true }).then(result => {     
+      this.$http.post("api/postcomment/" + this.$route.params.id, {content: this.msg.trim()}).then(result => {  // 全域性設定有包含post時需要的 emulateJSON:true   
+        if (result.body.status === 0) {
             // 1. 拼接出一個評論對像
             var cmt = {
               user_name: "匿名使用者",
               add_time: Date.now(),
               content: this.msg.trim()
             };
+            // 向陣列的開頭新增一個或多個元素(這邊是一個新的評論對像)，並且return新的長度
             this.comments.unshift(cmt);
             this.msg = "";
           }

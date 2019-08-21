@@ -12,7 +12,8 @@
     <div class="content" v-html="newsinfo.content"></div>
     
     <!-- 評論子元件區域 -->
-    <comment-box :id="this.id"></comment-box>
+    <!-- <comment-box :id="this.id"></comment-box> -->
+    <comment-box :id="id"></comment-box>
   </div>
 </template>
 

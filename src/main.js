@@ -6,6 +6,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 1.2 安裝路由
 Vue.use(VueRouter)
+// 1.3 匯入自訂義的 router.js 路由模組
+import router from './router.js'
 
 // 2.1 匯入 vue-resource
 import VueResource from 'vue-resource'
@@ -24,20 +26,29 @@ import './lib/mui/css/mui.min.css'
 // 匯入 MUI 的擴充圖標樣式檔
 import './lib/mui/css/icons-extra.css'
 
-// 按需匯入 Mint-UI 中的元件：
-// 頂部固定導航欄
-import {Header} from 'mint-ui'
-Vue.component(Header.name, Header)
-// 首頁廣告輪播   
-import {Swipe, SwipeItem} from 'mint-ui'
-Vue.component(Swipe.name, Swipe);
-Vue.component(SwipeItem.name, SwipeItem);
-// 發表評論按鈕
-import {Button} from 'mint-ui'
-Vue.component(Button.name, Button)
+// **** 按需匯入 Mint-UI 中的元件：
+// // import { Header, Swipe, SwipeItem, Button, Lazyload } from 'mint-ui' // 匯入的元件統一寫在一起
+// // 頂部固定導航欄
+// import {Header} from 'mint-ui'
+// Vue.component(Header.name, Header)
+// // 首頁廣告輪播   
+// import {Swipe, SwipeItem} from 'mint-ui'
+// Vue.component(Swipe.name, Swipe);
+// Vue.component(SwipeItem.name, SwipeItem);
+// // 發表評論按鈕
+// import {Button} from 'mint-ui'
+// Vue.component(Button.name, Button)
+// // 懶加載  ==> 結果發現沒有載入動畫圖示
+// import { Lazyload } from 'mint-ui';
+// Vue.use(Lazyload);
 
-// 匯入 App 根元件
-import app from './App.vue'
+// **** 完整匯入 Mint-UI 中的全部元件：
+// ==> 按需匯入 Lazyload元件 沒有載入動畫圖示，改成匯入全部就可以了
+import MintUI from 'mint-ui'
+Vue.use(MintUI)
+import 'mint-ui/lib/style.css'
+
+
 
 // 過濾器及日期格式化moment庫：
 // 先匯入日期格式化moment庫 (http://momentjs.cn/) ，也可以直接
@@ -47,10 +58,12 @@ Vue.filter('dateFormat', function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
   return moment(dataStr).format(pattern)
 })
 
+// 匯入 vue-preview圖片預覽插件
+import VuePreview from 'vue-preview'
+Vue.use(VuePreview)
 
-
-// 1.3 匯入自訂義的 router.js 路由模組
-import router from './router.js'
+// 匯入 App 根元件
+import app from './App.vue'
 
 var vm = new Vue({
   el: '#app',
