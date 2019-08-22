@@ -3,7 +3,7 @@
 
     <!-- 在網頁中，有兩種跳轉方式： -->
 
-    <!-- 方式1： 使用 a 標籤 的形式叫做 標籤跳轉，這邊是路由渲染的a標籤  -->    
+    <!-- 方式1： 使用 a 標籤 的形式叫做 "標籤跳轉"，這邊是路由渲染的a標籤  -->    
     <!-- <router-link class="goods-item" v-for="item in goodslist" :key="item.id" :to="'/home/goodsinfo/' + item.id" tag="div">
       <img :src="item.img_url" alt="">
       <h1 class="title">{{ item.title }}</h1>
@@ -19,7 +19,8 @@
       </div>
     </router-link> -->
 
-    <!-- 方式2： 使用 window.location.href 的形式，叫做 程式設計式導航 -->
+    <!-- 方式2： 使用如 window.location.href 的js形式，叫做 "編程式導航" -->
+    <!-- https://router.vuejs.org/zh/guide/essentials/navigation.html -->
     <div class="goods-item" v-for="item in goodslist" :key="item.id" @click="goDetail(item.id)">
       <img :src="item.img_url" alt="">
       <h1 class="title">{{ item.title }}</h1>
@@ -45,7 +46,7 @@ export default {
   data() {
     // data 是往自己元件內部，掛載一些私有數據的
     return {
-      pageindex: 1, // 分頁的頁數
+      pageindex: 1, // 分頁的頁數，預設展示第一頁數據
       goodslist: [] // 存放商品列表的陣列
     };
   },
@@ -60,12 +61,13 @@ export default {
         .then(result => {
           if (result.body.status === 0) {
             // this.goodslist = result.body.message;
-            this.goodslist = this.goodslist.concat(result.body.message);
+            // 每當按"載入更多"獲取新下一頁商品列表數據的時候，不要把原有數據清空覆蓋，而是應該以原有數據，拼接上新數據
+            this.goodslist = this.goodslist.concat(result.body.message); //會將兩個陣列合併產生新的陣列，例如第一頁加上第二頁數據
           }
         });
     },
     getMore() {
-      this.pageindex++;
+      this.pageindex++;// 每當按"載入更多"的時候，頁數都會加1
       this.getGoodsList();
     },
     goDetail(id) {

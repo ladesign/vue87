@@ -35,7 +35,7 @@ var router = new VueRouter({
         // 詳情頁路由(列表頁跳轉到詳情頁)  
         { path: '/home/newsinfo/:id', component: NewsInfo },
         { path: '/home/photoinfo/:id', component: PhotoInfo },
-        // { path: '/home/goodsinfo/:id', component: GoodsInfo, name: 'goodsinfo' },
+        // { path: '/home/goodsinfo/:id', component: GoodsInfo, name: 'goodsinfo' }, // 這邊多一個name屬性
         // { path: '/home/goodsdesc/:id', component:GoodsDesc, name: 'goodsdesc'  },
         // { path: '/home/goodscomment/:id', component: GoodsComment, name: 'goodscomment' }                  
     ],

@@ -48,8 +48,8 @@ export default {
       this.$http.get("api/getcomments/" + this.id + "?pageindex=" + this.pageIndex).then(result => {  // 用props傳遞參數 
           if (result.body.status === 0) {
             // this.comments = result.body.message;
-            // 每當獲取新評論數據的時候，不要把老數據清空覆蓋，而是應該以老數據，拼接上新數據
-            this.comments = this.comments.concat(result.body.message); //會將兩個陣列合併產生新的陣列，原陣列不改變 
+            // 每當按"載入更多"獲取新評論數據的時候，不要把原有數據清空覆蓋，而是應該以原有數據，拼接上新數據
+            this.comments = this.comments.concat(result.body.message); //會將兩個陣列合併產生新的陣列，例如第一頁加上第二頁數據
           } else {
             Toast("獲取評論失敗！");
           }
@@ -57,7 +57,7 @@ export default {
     },
     getMore() {
       // 載入更多
-      this.pageIndex++;
+      this.pageIndex++;// 每當按"載入更多"的時候，頁數都會加1
       this.getComments();
     },
     postComment() {

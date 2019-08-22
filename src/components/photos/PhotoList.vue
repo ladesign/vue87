@@ -38,7 +38,7 @@
           <!-- <a :class="['mui-control-item', item.id == 0 ? 'mui-active' : '']" v-for="item in cates" :key="item.id"> -->
 
            <!-- 根據分類id，獲取該分類的圖片列表 -->
-           <!-- 用@click觸發事件在手機上並無反應 -->
+           <!-- 用@click觸發事件在手機上並無反應，改用@tap，限mui框架元件用 -->
           <!-- <a :class="['mui-control-item', item.id == 0 ? 'mui-active' : '']" v-for="item in cates" :key="item.id" @click="getPhotoListByCateId(item.id)"> -->
           <a :class="['mui-control-item', item.id == 0 ? 'mui-active' : '']" v-for="item in cates" :key="item.id" @tap="getPhotoListByCateId(item.id)">
             {{ item.title }}
