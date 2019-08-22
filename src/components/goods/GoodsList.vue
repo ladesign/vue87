@@ -78,12 +78,13 @@ export default {
       // 其中： this.$router 是一個路由【導航對像】，用它 可以方便的 使用 JS 程式碼，實現路由的 前進、後退、 跳轉到新的 URL 地址
 
       console.log(this);
+
       // 1. 最簡單的
       // this.$router.push("/home/goodsinfo/" + id);
       // 2. 傳遞對像
       // this.$router.push({ path: "/home/goodsinfo/" + id });
       // 3. 傳遞命名的路由
-      this.$router.push({ name: "goodsinfo", params: { id } });
+      this.$router.push({ name: "goodsinfo", params: { id } }); 
     }
   }
 };

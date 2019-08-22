@@ -16,7 +16,8 @@ import GoodsList from './components/goods/GoodsList.vue'
 // 詳情頁路由(列表頁跳轉到詳情頁)
 import NewsInfo from './components/news/NewsInfo.vue'
 import PhotoInfo from './components/photos/PhotoInfo.vue'
-// import GoodsInfo from './components/goods/GoodsInfo.vue'
+import GoodsInfo from './components/goods/GoodsInfo.vue'
+
 // import GoodsDesc from './components/goods/GoodsDesc.vue'
 // import GoodsComment from './components/goods/GoodsComment.vue'
 // 建立路由對像
@@ -35,7 +36,12 @@ var router = new VueRouter({
         // 詳情頁路由(列表頁跳轉到詳情頁)  
         { path: '/home/newsinfo/:id', component: NewsInfo },
         { path: '/home/photoinfo/:id', component: PhotoInfo },
-        // { path: '/home/goodsinfo/:id', component: GoodsInfo, name: 'goodsinfo' }, // 這邊多一個name屬性
+        
+        //一般寫法
+        // { path: '/home/goodsinfo/:id', component: GoodsInfo }, 
+        // 為此路由命名，此例表示用 name: 'goodsinfo' 就能指到 { path: '/home/goodsinfo/:id', component: GoodsInfo } 這個路由
+        { path: '/home/goodsinfo/:id', component: GoodsInfo, name: 'goodsinfo' }, 
+        
         // { path: '/home/goodsdesc/:id', component:GoodsDesc, name: 'goodsdesc'  },
         // { path: '/home/goodscomment/:id', component: GoodsComment, name: 'goodscomment' }                  
     ],
