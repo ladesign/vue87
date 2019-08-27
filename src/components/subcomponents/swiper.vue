@@ -2,9 +2,11 @@
   <div>
     <mt-swipe :auto="4000">
       <!-- 在元件中，使用v-for循環的話，一定要使用 key -->
-      <!-- 將來，誰使用此 輪播圖元件，誰為我們傳遞 lunbotuList -->
-      <!-- 此時，lunbotuList 應該是 父元件(HomeContainer.vue)向 子元件(swiper.vue)傳值來設定 -->
+      <!-- 將來，誰要使用此 輪播圖元件，誰就要為我們傳遞 lunbotuList -->
+      <!-- 例如首頁用此輪播圖元件，應該就是 父元件(HomeContainer.vue)向 子元件(swiper.vue)傳lunbotuList值來設定 -->
+      <!-- 注意!首頁取得的輪播用圖片位址是放在img屬性中，而商品詳情頁是放在src屬性中，子元件要的是img值，所以商品詳情頁要用這個輪播子元件必須將src屬性轉成img屬性 -->
       <mt-swipe-item v-for="item in lunbotuList" :key="item.id">
+        <!-- <img :src="item.img" alt=""> -->
         <img :src="item.img" alt="" :class="{'full': isfull}">
       </mt-swipe-item>
     </mt-swipe>
@@ -31,6 +33,16 @@ export default {
 
   .mint-swipe-item {
     text-align: center;
+
+    // &:nth-child(1){
+    //   background-color: red;
+    // }
+    // &:nth-child(2){
+    //   background-color: blue;
+    // }
+    // &:nth-child(3){
+    //   background-color: cyan;
+    // }
 
     img {
       // width: 100%;

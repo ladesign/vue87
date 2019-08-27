@@ -18,8 +18,8 @@ import NewsInfo from './components/news/NewsInfo.vue'
 import PhotoInfo from './components/photos/PhotoInfo.vue'
 import GoodsInfo from './components/goods/GoodsInfo.vue'
 
-// import GoodsDesc from './components/goods/GoodsDesc.vue'
-// import GoodsComment from './components/goods/GoodsComment.vue'
+import GoodsDesc from './components/goods/GoodsDesc.vue'
+import GoodsComment from './components/goods/GoodsComment.vue'
 // 建立路由對像
 var router = new VueRouter({
     routes: [
@@ -35,15 +35,15 @@ var router = new VueRouter({
         { path: '/home/goodslist', component: GoodsList },
         // 詳情頁路由(列表頁跳轉到詳情頁)  
         { path: '/home/newsinfo/:id', component: NewsInfo },
-        { path: '/home/photoinfo/:id', component: PhotoInfo },
-        
-        //一般寫法
-        // { path: '/home/goodsinfo/:id', component: GoodsInfo }, 
+        { path: '/home/photoinfo/:id', component: PhotoInfo },         
+        // { path: '/home/goodsinfo/:id', component: GoodsInfo }, // 一般寫法        
+        { path: '/home/goodsinfo/:id', component: GoodsInfo, name: 'goodsinfo' }, // 改用命名路由方式 
         // 為此路由命名，此例表示用 name: 'goodsinfo' 就能指到 { path: '/home/goodsinfo/:id', component: GoodsInfo } 這個路由
-        { path: '/home/goodsinfo/:id', component: GoodsInfo, name: 'goodsinfo' }, 
-        
-        // { path: '/home/goodsdesc/:id', component:GoodsDesc, name: 'goodsdesc'  },
-        // { path: '/home/goodscomment/:id', component: GoodsComment, name: 'goodscomment' }                  
+
+        // 商品詳情頁跳轉到圖文介紹頁：使用命名路由方式
+        { path: '/home/goodsdesc/:id', component:GoodsDesc, name: 'goodsdesc'  },
+        // 商品詳情頁跳轉到商品評論頁：使用命名路由方式 
+        { path: '/home/goodscomment/:id', component: GoodsComment, name: 'goodscomment' }                
     ],
     linkActiveClass: 'mui-active' // 預設點中路由會自動添加一個叫做 router-link-active的類，因為是引用mui樣式，所以可以用mui點中時會套用的mui-active類覆蓋原有樣式即可，不要再重新定義新的類了
 });

@@ -12,18 +12,18 @@
       <mt-swipe-item>3</mt-swipe-item>
     </mt-swipe> -->
     <!-- Swipe標籤套用真實數據 -->
-    <mt-swipe :auto="4000">
+    <!-- <mt-swipe :auto="4000"> -->
       <!-- 在元件中，使用v-for循環的話，一定要使用 key -->
       <!-- 將來，誰使用此 輪播圖元件，誰為我們傳遞 lunbotuList -->
       <!-- 此時，lunbotuList 應該是 父元件向子元件傳值來設定 -->
-      <mt-swipe-item v-for="item in lunbotuList" :key="item.id">
-        <img :src="item.img" alt="">
-        <!-- <img :src="item.img" alt="" :class="{'full': isfull}"> -->
-      </mt-swipe-item>
-    </mt-swipe>
+      <!-- <mt-swipe-item v-for="item in lunbotuList" :key="item.id"> -->
+        <!-- <img :src="item.img" alt=""> -->
+      <!-- </mt-swipe-item> -->
+    <!-- </mt-swipe> -->
 
-    <!-- 方式二、將Mint UI的Swipe組件標籤移到自訂義的輪播子元件去 -->
-    <!-- <swiper :lunbotuList="lunbotuList" :isfull="true"></swiper> -->
+    <!-- 方式二、將 方式一 的Mint UI的Swipe組件標籤寫法移到自訂義的輪播子元件swiper.vue去 -->
+    <!-- 3-使用子元件 -->
+    <swiper :lunbotuList="lunbotuList" :isfull="true"></swiper>
 
 
     <!-- 
@@ -100,8 +100,8 @@
 // 按需匯入 Mint-UI 中的元件，這邊只用到Toast元件顯示獲取輪播圖數據失敗的訊息：http://mint-ui.github.io/docs/#/zh-cn2/toast
 import { Toast } from "mint-ui"; 
 
-// 載入子元件
-// import swiper from "../subcomponents/swiper.vue";
+// 1-載入子元件
+import swiper from "../subcomponents/swiper.vue";
 
 export default {
   data() {
@@ -128,9 +128,9 @@ export default {
       });
     }
   },
-//   components: {
-//     swiper
-  // }
+  components: {
+    swiper  // 2-註冊子元件
+  }
 };
 </script>
 
@@ -140,29 +140,29 @@ h3{
 }
 
 // 輪播圖區域，方式一：
-
-.mint-swipe {
-  height: 200px;
-
-  .mint-swipe-item {
-    text-align: center;
-    // 測試Swipe組件是否成功
-    // &:nth-child(1){
-    //   background-color: red;
-    // }
-    // &:nth-child(2){
-    //   background-color: blue;
-    // }
-    // &:nth-child(3){
-    //   background-color: cyan;
-    // }
-    // 套用真實數據
-      img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
+// .mint-swipe {
+//   height: 200px;
+//   .mint-swipe-item {
+//     text-align: center;
+//     // 測試Swipe組件是否成功
+//     // &:nth-child(1){
+//     //   background-color: red;
+//     // }
+//     // &:nth-child(2){
+//     //   background-color: blue;
+//     // }
+//     // &:nth-child(3){
+//     //   background-color: cyan;
+//     // }
+//     // 套用真實數據
+//       img {
+//       width: 100%;
+//       height: 100%;
+//     }
+//   }
+// }
+// 輪播圖區域，方式二：
+// 將方式一中mint-swipe相關樣式移到輪播子元件swiper.vue去
 
 // 九宮格：
 .mui-grid-view.mui-grid-9{
