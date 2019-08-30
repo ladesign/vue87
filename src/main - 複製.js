@@ -1,45 +1,23 @@
-// 入口文件
-// console.log('入口文件OK')
+// 入口檔案
 import Vue from 'vue'
-
 // 1.1 匯入路由的包
 import VueRouter from 'vue-router'
-// 1.2 註冊 vue-router 到 vue 中
+// 1.2 安裝路由
 Vue.use(VueRouter)
-// 1.3 匯入自訂義的 router.js 路由模組
-import router from './router.js'
 
-// 2.1 匯入 vue-resource
-import VueResource from 'vue-resource'
-// 2.2 註冊 vue-resource 到 vue 中
-Vue.use(VueResource)
-// 2.3 全域性設定API請求的根路徑
-Vue.http.options.root = 'http://www.liulongbin.top:3005';
-// Vue.http.options.root = 'http://47.89.21.179:8080';  // 用這個接口圖片無法使用
-// 2.4 全域性設定 post 時候表單數據格式組織形式  application/x-www-form-urlencoded，
-//     手動發起的 Post 請求，預設沒有表單格式，有的伺服器處理不了，
-//     所以通過 post 方法的第三個參數， { emulateJSON: true } 設定 提交的內容型別 為 普通表單數據格式。
-Vue.http.options.emulateJSON = true;
-
-// 3.1 匯入vuex包
+// 註冊 vuex
 import Vuex from 'vuex'
-// 3.2 註冊 vuex 到 vue 中
 Vue.use(Vuex)
-// 4. new Vuex.store() 實例，創建一個store數據倉儲對像
-// 每次剛進入 網站，肯定會 呼叫 main.js 在剛呼叫的時候，先從 本地儲存 中，把 購物車的數據讀出來，放到 store 中
+
+// 每次剛進入 網站，肯定會 呼叫 main.js 在剛呼叫的時候，先從本地儲存中，把 購物車的數據讀出來，放到 store 中
 var car = JSON.parse(localStorage.getItem('car') || '[]')
 
 var store = new Vuex.Store({
-  state: { // 調用方式：this.$store.state.***
-    car: []     
-    // 將 購物車中的商品的數據，用一個"陣列"儲存起來。
-    // 在 car 陣列中，儲存所有已加入購物車的 商品資訊對像， 咱們可以暫時將每個商品對象數據，商品資訊對像 設計成以下這個樣子：
+  state: { // this.$store.state.***
+    car: car // 將 購物車中的商品的數據，用一個陣列儲存起來，在 car 陣列中，儲存一些商品的對象， 咱們可以暫時將這個商品對象，設計成這個樣子   
     // { id:商品的id, count: 要購買的數量, price: 商品的單價，selected: false  }
-    // selected屬性: 進入購物車頁時，此商品是否選中(false：不選中，不要在本次結帳時一起結算)，
-
-    // car: car
   },
-  mutations: { // 調用方式：this.$store.commit('方法的名稱', '按需傳遞唯一的參數')
+  mutations: { // this.$store.commit('方法的名稱', '按需傳遞唯一的參數')
     addToCar(state, goodsinfo) {
       // 點選加入購物車，把商品資訊，儲存到 store 中的 car 上
       // 分析：
@@ -98,7 +76,7 @@ var store = new Vuex.Store({
       localStorage.setItem('car', JSON.stringify(state.car))
     }
   },
-  getters: { // 調用方式：this.$store.getters.***
+  getters: { // this.$store.getters.***
     // 相當於 計算屬性，也相當於 filters
     getAllCount(state) {
       var c = 0;
@@ -137,46 +115,49 @@ var store = new Vuex.Store({
   }
 })
 
-// 匯入 MUI 的樣式，包含預設圖標樣式
-import './lib/mui/css/mui.min.css'
-// 匯入 MUI 的擴充圖標樣式檔
-import './lib/mui/css/icons-extra.css'
-
-// **** 按需匯入 Mint-UI 中的元件：
-// // import { Header, Swipe, SwipeItem, Button, Lazyload } from 'mint-ui' // 匯入的元件統一寫在一起
-// // 頂部固定導航欄
-// import {Header} from 'mint-ui'
-// Vue.component(Header.name, Header)
-// // 首頁廣告輪播   
-// import {Swipe, SwipeItem} from 'mint-ui'
-// Vue.component(Swipe.name, Swipe);
-// Vue.component(SwipeItem.name, SwipeItem);
-// // 發表評論按鈕
-// import {Button} from 'mint-ui'
-// Vue.component(Button.name, Button)
-// // 懶加載  ==> 結果發現沒有載入動畫圖示
-// import { Lazyload } from 'mint-ui';
-// Vue.use(Lazyload);
-
-// **** 完整匯入 Mint-UI 中的全部元件：
-// ==> 按需匯入 Lazyload元件 沒有載入動畫圖示，改成匯入全部就可以了
-import MintUI from 'mint-ui'
-Vue.use(MintUI)
-import 'mint-ui/lib/style.css'
-
-
-
-// 過濾器及日期格式化moment庫：
-// 先匯入日期格式化moment庫 (http://momentjs.cn/) ，也可以直接
+// 匯入格式化時間的外掛
 import moment from 'moment'
 // 定義全域性的過濾器
 Vue.filter('dateFormat', function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
   return moment(dataStr).format(pattern)
 })
 
-// 匯入 vue-preview圖片預覽插件
+// 2.1 匯入 vue-resource
+import VueResource from 'vue-resource'
+// 2.2 安裝 vue-resource
+Vue.use(VueResource)
+// 設定請求的根路徑
+Vue.http.options.root = 'http://www.liulongbin.top:3005';
+// 全域性設定 post 時候表單數據格式組織形式   application/x-www-form-urlencoded
+Vue.http.options.emulateJSON = true;
+
+
+// 匯入 MUI 的樣式
+import './lib/mui/css/mui.min.css'
+// 匯入擴充套件圖示樣式
+import './lib/mui/css/icons-extra.css'
+
+
+// 按需匯入 Mint-UI 中的元件   
+/* import { Header, Swipe, SwipeItem, Button, Lazyload } from 'mint-ui'
+Vue.component(Header.name, Header)
+Vue.component(Swipe.name, Swipe)
+Vue.component(SwipeItem.name, SwipeItem)
+Vue.component(Button.name, Button)
+Vue.use(Lazyload); */
+import MintUI from 'mint-ui'
+Vue.use(MintUI)
+import 'mint-ui/lib/style.css'
+
+
+// 安裝 圖片預覽外掛
 import VuePreview from 'vue-preview'
 Vue.use(VuePreview)
+
+
+// 1.3 匯入自己的 router.js 路由模組
+import router from './router.js'
+
 
 // 匯入 App 根元件
 import app from './App.vue'
@@ -184,8 +165,6 @@ import app from './App.vue'
 var vm = new Vue({
   el: '#app',
   render: c => c(app),
-  // 1.4 將 VueRouter 建立的 router路由對像 掛載到 VM 實例上，只要掛載到了 vm 上，任何元件都能使用 "$router全域對像" 來獲取路由
-  router, 
-  // 3.4 將 Vuex 建立的 store數據倉儲對像 掛載到 VM 實例上，只要掛載到了 vm 上，任何元件都能使用 "$store全域對像" 來存取數據
-  store
+  router, // 1.4 掛載路由對像到 VM 實例上
+  store // 掛載 store 狀態管理對像
 })

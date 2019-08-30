@@ -3,7 +3,7 @@
     <!-- 頂部 Header 區域 
     引用 Mint-ui組件庫\CSS Component\Header：http://mint-ui.github.io/docs/#/zh-cn2/header
     -->
-    <mt-header fixed title="固定在頂部"></mt-header>
+    <mt-header fixed title="商城"></mt-header>
     <!-- <mt-header fixed title="黑馬程式設計師·Vue專案">
       <span slot="left" @click="goBack" v-show="flag">
         <mt-button icon="back">返回</mt-button>

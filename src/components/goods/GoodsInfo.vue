@@ -95,7 +95,7 @@ export default {
       // ballFlag: true, // 顯示小球，調整小球位置用
       ballFlag: false,  // 未點擊加到購物車按鈕前先隱藏小球
 
-      selectedCount: 1 // 儲存使用者選中的商品數量， 預設，認為使用者買1個
+      selectedCount: 1 // 儲存使用者預設選中的商品數量， 預設，認為使用者買1個
 
     };
   },
@@ -117,7 +117,7 @@ export default {
         }
       })
     },
-     getGoodsInfo() { // 獲取商品的資訊
+    getGoodsInfo() { // 獲取商品的資訊
       this.$http.get("api/goods/getinfo/" + this.id).then(result => {
         if (result.body.status === 0) {
           this.goodsinfo = result.body.message[0];
@@ -135,6 +135,19 @@ export default {
     addToShopCar() {
       // 點擊加入購物車時，ballFlag值變為!false(即為true)，所以 v-show=true，小球顯示出來
       this.ballFlag = !this.ballFlag;
+
+      // 新增到購物車(儲存至store對象)：
+      // 將存到vuex的store對象中的每個商品數據為- { id:商品的id, count: 要購買的數量, price: 商品的單價，selected: false  }
+      // (1) 拼接出一個要儲存到 store 中 car[]陣列 裡的 商品資訊對像
+      var goodsinfo = {
+        id: this.id,
+        count: this.selectedCount,
+        price: this.goodsinfo.sell_price,
+        selected: true
+      };
+      // (2) 呼叫 store 中的 mutations倉庫管理員中的一個方法，來將商品加入購物車(儲存至store對象)
+      this.$store.commit("addToCar", goodsinfo);
+
     },    
     beforeEnter(el) {// 動畫鉤子函數，動畫入場之前
       // beforeEnter 表示動畫入場之前，此時，動畫尚未開始，可以 在 beforeEnter 中，設定元素開始動畫之前的起始樣式
