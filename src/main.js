@@ -25,19 +25,22 @@ Vue.http.options.emulateJSON = true;
 import Vuex from 'vuex'
 // 3.2 註冊 vuex 到 vue 中
 Vue.use(Vuex)
-// 4. new Vuex.store() 實例，創建一個store數據倉儲對像
-// 每次剛進入 網站，肯定會 呼叫 main.js 在剛呼叫的時候，先從 本地儲存 中，把 購物車的數據讀出來，放到 store 中
+
+// 3.4 每次剛進入 網站，肯定會 呼叫 main.js 在剛呼叫的時候，先從 本地儲存 中，把 購物車的數據讀出來，放到 store 中
 var car = JSON.parse(localStorage.getItem('car') || '[]')
 
+// 3.3 new Vuex.store() 實例，創建一個store數據倉儲對像
 var store = new Vuex.Store({
   state: { // 調用方式：this.$store.state.***
-    car: []     
-    // 將 購物車中的商品的數據，用一個"陣列"儲存起來。
+    // 將加入購物車中的商品的數據，用一個"car陣列"儲存起來，每ㄧ個商品都是 car陣列 中的一個元素。
+    // car: [] 
     // 在 car 陣列中，儲存所有已加入購物車的 商品資訊對像， 咱們可以暫時將每個商品對象數據，商品資訊對像 設計成以下這個樣子：
     // { id:商品的id, count: 要購買的數量, price: 商品的單價，selected: false  }
     // selected屬性: 進入購物車頁時，此商品是否選中(false：不選中，不要在本次結帳時一起結算)，
+    // 這樣寫每次剛進入網站時，都會是一個空購物車。
 
-    // car: car
+    // 改成這樣，每次剛進入網站，都會呼叫 main.js，在剛呼叫的時候，先從 本地儲存 中，把原有 購物車的數據讀出來，放到 store 中
+    car: car
   },
   mutations: { // 調用方式：this.$store.commit('方法的名稱', '按需傳遞唯一的參數')
     addToCar(state, goodsinfo) {
@@ -62,7 +65,7 @@ var store = new Vuex.Store({
         state.car.push(goodsinfo)
       }
 
-      // 當 更新 car 之後，把 car 陣列，儲存到 本地的 localStorage 中
+      // 當更新 car 之後，把最終 car陣列 儲存到 本地的 localStorage 中
       localStorage.setItem('car', JSON.stringify(state.car))
     },
     updateGoodsInfo(state, goodsinfo) {
@@ -99,13 +102,16 @@ var store = new Vuex.Store({
     }
   },
   getters: { // 調用方式：this.$store.getters.***
-    // 相當於 計算屬性，也相當於 filters
+    // 相當於 computed計算屬性功能，也相當於 filters過濾器功能
+
+    //監聽的state內的car陣列，有任何元素的count數據改變時馬上重新加總並返回呼叫處，所以只要點擊"加入購物車"，就會有count改變，立即就會觸發getAllCount()
     getAllCount(state) {
       var c = 0;
-      state.car.forEach(item => {
+      // console.log('getAllCount觸發');
+      state.car.forEach(item => { //監聽state內的car陣列屬性，遍歷car內元素，找出購物車內所有商品的購買數量後加總
         c += item.count
       })
-      return c
+      return c 
     },
     getGoodsCount(state) {
       var o = {}

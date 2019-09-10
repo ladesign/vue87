@@ -37,7 +37,6 @@ export default {
     // console.log('子元件取得父元件傳值，庫存量為 '+this.max);
   },
   methods: {
-
     countChanged() {
       // 每當 文字框的數據被修改的時候，立即把 最新的數據，通過事件呼叫，傳遞給父元件
       console.log('子元件的值為： '+this.$refs.numbox.value);
