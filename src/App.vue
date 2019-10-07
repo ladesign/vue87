@@ -3,15 +3,23 @@
     <!-- 頂部 Header 區域 
     引用 Mint-ui組件庫\CSS Component\Header：http://mint-ui.github.io/docs/#/zh-cn2/header
     -->
-    <mt-header fixed title="商城"></mt-header>
-    <!-- <mt-header fixed title="黑馬程式設計師·Vue專案">
+    <!-- <mt-header fixed title="商城"></mt-header> -->
+    <mt-header fixed title="商城">
+      <!-- 官網範例直用 -->
+      <!-- <router-link to="/" slot="left">
+        <mt-button icon="back">返回</mt-button>
+      </router-link> -->
+      <!-- 修改成呼叫自定義事件 -->
       <span slot="left" @click="goBack" v-show="flag">
         <mt-button icon="back">返回</mt-button>
       </span>
-    </mt-header>-->
+    </mt-header>
+
+    (返回按鈕顯示用的flag={{flag}})
 
     <!-- 中間的 路由切換時的渲染區域 router-view  -->
     <transition>
+      
 			<router-view></router-view>
     </transition>
 
@@ -67,11 +75,40 @@
     </nav>
 
     <!-- <h1>這是 APP 根元件</h1> -->
+    
   </div>
+  
 </template>
 
 
 <script>
+
+export default {
+  data() {
+    return {
+      flag: false //預設為false，不顯示返回按鈕
+    };
+  },
+  created() { //實例已經創建完成之後被調用，沒有這個時，每次重讀app時flag都會變成false，返回鈕就不見
+    this.flag = this.$route.path === "/home" ? false : true;
+  },
+  methods: {    
+    goBack() {
+      // click觸發事件，使用vue-routert的編程式導航中的 router.go方法，這邊每次返回一步歷史紀錄
+      this.$router.go(-1);
+    }
+  },
+  watch: {   
+    "$route.path": function(newVal) {
+      console.log("監聽的$route.path值為 "+newVal)
+      if (newVal === "/home") {
+        this.flag = false;
+      } else {
+        this.flag = true;
+      }
+    }
+  }
+};
 </script>
 
 

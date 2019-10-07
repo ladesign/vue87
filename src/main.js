@@ -49,6 +49,8 @@ var store = new Vuex.Store({
       // 1. 如果購物車中，之前就已經有這個對應的商品了，那麼，只需要更新數量
       // 2. 如果沒有，則直接把 商品數據，push 到 car 中即可
 
+      // 注意：此項目沒有寫入遠端數據庫
+
       // 假設 在購物車中，沒有找到對應的商品
       var flag = false
 
@@ -92,6 +94,7 @@ var store = new Vuex.Store({
       localStorage.setItem('car', JSON.stringify(state.car))
     },
     updateGoodsSelected(state, info) {
+      console.log(info.id + " , " + info.selected); 
       state.car.some(item => {
         if (item.id == info.id) {
           item.selected = info.selected
